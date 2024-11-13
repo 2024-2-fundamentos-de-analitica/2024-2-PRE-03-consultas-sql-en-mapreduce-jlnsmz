@@ -3,16 +3,14 @@
 # pylint: disable=broad-exception-raised
 # pylint: disable=import-error
 
-from .mapreduce import run_mapreduce_job  # type: ignore
+
+
+
+from .mapreduce import run_mapreduce_job
 
 #
 # Columns:
 # total_bill, tip, sex, smoker, day, time, size
-#
-
-#
-# SELECT *, tip/total_bill as tip_rate
-# FROM tips;
 #
 def mapper_query_1(sequence):
     """Mapper"""
@@ -33,12 +31,6 @@ def reducer_query_1(sequence):
     """Reducer"""
     return sequence
 
-
-#
-# SELECT *
-# FROM tips
-# WHERE time = 'Dinner';
-#
 def mapper_query_2(sequence):
     """Mapper"""
     result = []
@@ -55,12 +47,6 @@ def reducer_query_2(sequence):
     """Reducer"""
     return sequence
 
-
-#
-# SELECT *
-# FROM tips
-# WHERE time = 'Dinner' AND tip > 5.00;
-#
 def mapper_query_3(sequence):
     """Mapper"""
     result = []
@@ -78,12 +64,6 @@ def reducer_query_3(sequence):
     """Reducer"""
     return sequence
 
-
-#
-# SELECT *
-# FROM tips
-# WHERE size >= 5 OR total_bill > 45;
-#
 def mapper_query_4(sequence):
     """Mapper"""
     result = []
@@ -101,13 +81,7 @@ def reducer_query_4(sequence):
     """Reducer"""
     return sequence
 
-
-#
-# SELECT sex, count(*)
-# FROM tips
-# GROUP BY sex;
-#
-  def mapper_query_5(sequence):
+def mapper_query_5(sequence):
       """Mapper"""
       result = []
       for index, (_, row) in enumerate(sequence):
@@ -118,7 +92,7 @@ def reducer_query_4(sequence):
       return result
 
 
-  def reducer_query_5(sequence):
+def reducer_query_5(sequence):
       """Reducer"""
       counter = dict()
       for key, value in sequence:
@@ -161,13 +135,15 @@ def run():
         input_directory="files/input",
         output_directory="files/query_4",
     )
-
+    
     run_mapreduce_job(
         mapper=mapper_query_5,
         reducer=reducer_query_5,
         input_directory="files/input",
         output_directory="files/query_5",
     )    
+
+
 
 if __name__ == "__main__":
 
