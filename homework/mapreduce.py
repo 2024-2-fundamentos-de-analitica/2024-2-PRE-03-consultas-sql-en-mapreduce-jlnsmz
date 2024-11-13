@@ -1,10 +1,12 @@
 """Map/Reduce immplementation"""
-
+#
 # pylint: disable=broad-exception-raised
-
+#
 import fileinput
 import glob
 import os.path
+
+
 
 def _load_input(input_directory):
     sequence = []
@@ -29,7 +31,6 @@ def _save_output(output_directory, sequence):
         for key, value in sequence:
             f.write(f"{key}\t{value}\n")
 
-
 def _create_marker(output_directory):
     """Create Marker"""
     with open(f"{output_directory}/_SUCCESS", "w", encoding="utf-8") as f:
@@ -45,5 +46,4 @@ def run_mapreduce_job(mapper, reducer, input_directory, output_directory):
     _create_ouptput_directory(output_directory)
     _save_output(output_directory, sequence)
     _create_marker(output_directory)
-    
     
